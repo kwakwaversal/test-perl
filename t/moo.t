@@ -6,9 +6,41 @@ use Test2::Bundle::More;
 
 # ABSTRACT: Testing p3rl.org/Moo
 
-subtest lazy => \&test_lazy;
+subtest default => \&test_default;
+subtest lazy    => \&test_lazy;
 
 done_testing;
+
+BEGIN {
+    package Moo::Default;
+
+    use Moo;
+    use Types::Standard 'Str';
+
+    # ABSTRACT: testing default attributes
+
+    has foo => (
+        is      => 'ro',
+        default => sub { 'bar' },
+    );
+
+    has overwrite => (
+        is      => 'ro',
+        default => sub { 'hmm' },
+    );
+
+    has lazyfoo => (
+        is      => 'lazy',
+        default => sub { 'bar' },
+    );
+}
+
+sub test_default {
+    my $default = Moo::Default->new(overwrite => 'oh');
+    is $default->foo       => 'bar', 'sub returns default';
+    is $default->overwrite => 'oh',  'overwrite default on instantiation';
+    is $default->lazyfoo   => 'bar', 'lazy default works';
+}
 
 BEGIN {
     package Moo::Lazy;
@@ -35,13 +67,12 @@ BEGIN {
     sub _build_foo { 'extended' }
 }
 
-
 sub test_lazy {
     my $lazy = Moo::Lazy->new();
     is $lazy->foo => 'bar', 'builder acts *like* a default';
 
     my $attr = Moo::Lazy->new(foo => 'instantiated');
-    is $lazy->foo => 'bar', 'but setting attr on instantation has no affect';
+    is $attr->foo => 'instantiated', 'but setting attr on instantation has no affect';
 
     my $extended = Moo::Lazy::Extended->new();
     is $extended->foo => 'extended', 'the extended method _build_foo has priority';
