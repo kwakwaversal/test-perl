@@ -4,7 +4,7 @@ Testing Perl (a.k.a., reminding myself about Perl)
 # Synopsis
 
 ```
-$ prove -l
+$ prove -l -r
 ```
 
 # Description
