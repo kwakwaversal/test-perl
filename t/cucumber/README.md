@@ -58,7 +58,7 @@ Feature: Eating too many cucumbers may not be good for you
 # References
 
 * [BDD]
-* [BDD overview] http://docs.cucumber.io/bdd/overview/
+* [BDD overview](http://docs.cucumber.io/bdd/overview/)
 * [Cucumber]
 * [Perl]
 * [Test::BDD::Cucumber]
