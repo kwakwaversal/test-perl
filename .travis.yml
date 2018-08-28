@@ -11,6 +11,8 @@ perl:
   - "5.10"
 install:
   - cpanm -n --installdeps .
+script:
+  - prove -rl
 sudo: false
 notifications:
   email: false

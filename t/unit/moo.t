@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test2::Bundle::More;
+use Test2::V0;
 
 # ABSTRACT: Testing p3rl.org/Moo
 
