@@ -14,5 +14,8 @@ install:
 script:
   - prove -rl
 sudo: false
+branches:
+  except:
+    - /^playground-.*$/
 notifications:
   email: false
